@@ -1,14 +1,41 @@
 CC      = gcc
 CFLAGS  = -O2 -Wall -Wextra -std=c90 -pedantic
 
-all : main
+SRC_DIR = source
+BUILD   = build
 
-main: main.o
-	$(CC) $(CFLAGS) main.o -o main
+TARGET  = main
+SRC     = $(SRC_DIR)/main.c
+OBJ     = $(BUILD)/main.o
 
-main.o: main.c
-	$(CC) $(CFLAGS) -c main.c
-	yes | rm -i main main.o
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET)
+
+$(OBJ): $(SRC)
+	mkdir -p $(BUILD)
+	$(CC) $(CFLAGS) -c $(SRC) -o $(OBJ)
 
 clean:
-	yes | rm -i main.o main
+	rm -f $(OBJ) $(TARGET)CC      = gcc
+CFLAGS  = -O2 -Wall -Wextra -std=c90 -pedantic
+
+SRC_DIR = source
+BUILD   = build
+
+TARGET  = main
+SRC     = $(SRC_DIR)/main.c
+OBJ     = $(BUILD)/main.o
+
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET)
+
+$(OBJ): $(SRC)
+	mkdir -p $(BUILD)
+	$(CC) $(CFLAGS) -c $(SRC) -o $(OBJ)
+
+clean:
+	rm -f $(OBJ) $(TARGET)
