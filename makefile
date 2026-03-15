@@ -1,41 +1,29 @@
 CC      = gcc
-CFLAGS  = -O2 -Wall -Wextra -std=c90 -pedantic
+CFLAGS  = -O2 -Wall -Wextra -std=c90 -pedantic -Iinclude
 
-SRC_DIR = source
+SRC_DIR = src
 BUILD   = build
+TARGET  = typie
 
-TARGET  = main
-SRC     = $(SRC_DIR)/main.c
-OBJ     = $(BUILD)/main.o
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(patsubst $(SRC_DIR)/%.c,$(BUILD)/%.o,$(SRC))
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET)
+	$(CC) $(CFLAGS) $^ -o $@
 
-$(OBJ): $(SRC)
+$(BUILD)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(BUILD)
-	$(CC) $(CFLAGS) -c $(SRC) -o $(OBJ)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(TARGET)CC      = gcc
-CFLAGS  = -O2 -Wall -Wextra -std=c90 -pedantic
+	rm -rf $(BUILD) $(TARGET)
 
-SRC_DIR = source
-BUILD   = build
+re: clean all
 
-TARGET  = main
-SRC     = $(SRC_DIR)/main.c
-OBJ     = $(BUILD)/main.o
-
-all: $(TARGET)
-
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET)
-
-$(OBJ): $(SRC)
-	mkdir -p $(BUILD)
-	$(CC) $(CFLAGS) -c $(SRC) -o $(OBJ)
+.PHONY: all clean re	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -rf $(BUILD) $(TARGET)
