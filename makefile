@@ -24,6 +24,3 @@ re: clean all
 
 .PHONY: all clean re	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
-
-clean:
-	rm -rf $(BUILD) $(TARGET)

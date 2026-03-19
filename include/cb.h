@@ -1,6 +1,11 @@
-#ifndef MYHEADER_H
-#define MYHEADER_H
+#ifndef cb_H
+#define cb_H
 
-const char * func_Get_String_LibNameCLI();
+int func_DysplayInfoScreen(
+    const unsigned short int var_suint_VerType,
+    const unsigned short int var_suint_Version,
+    const char * var_str_Name,
+    const char * var_str_Author,
+    const char * var_str_Licences);
 
 #endif
