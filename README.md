@@ -16,6 +16,9 @@ The project deliberately avoids invisible automation (automatic word-wrapping, d
 
 ### Implemented or Planned
 
+- ** Automatic Scrolling **
+  - It automaticly focus on current line
+
 - **Backspace Behavior**
   - Backspace behavior is configurable:
     - cursor movement only, or
